@@ -1,8 +1,14 @@
+import { authOptions } from "@/lib/auth";
+import { getServerSession } from "next-auth";
 
-export default function Home() {
+const page = async () => {
+  const session = await getServerSession(authOptions);
   return (
-    <main className="underline">
+    <div>
       <h1>Dev Chat</h1>
-    </main>
-  )
-}
+      <pre>{JSON.stringify(session, null, 2)}</pre>
+    </div>
+  );
+};
+
+export default page;

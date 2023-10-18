@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { Eye } from "lucide-react";
 import GoogleBtn from "@/components/authButton/GoogleBtn";
+import GithubBtn from "@/components/authButton/GithubBtn";
 
 function Login() {
   const GoogleIcon = () => (
@@ -107,9 +108,7 @@ function Login() {
 
               <div className="flex justify-center space-x-2 mx-6 mb-6">
                 <GoogleBtn/>
-                <Button className="w-full">
-                  <GithubIcon />
-                </Button>
+               <GithubBtn/>
               </div>
             </Card>
           </TabsContent>

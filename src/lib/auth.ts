@@ -3,6 +3,8 @@ import { UpstashRedisAdapter } from "@next-auth/upstash-redis-adapter";
 import { db } from "./db";
 import GoogleProvider from "next-auth/providers/google";
 import GithubProvider from "next-auth/providers/github";
+import EmailProvider from "next-auth/providers/email";
+import { custom } from "zod";
 
 function getGoogleCredentials() {
   const clientId = process.env.GOOGLE_CLIENT_ID;
@@ -50,7 +52,20 @@ export const authOptions: NextAuthOptions = {
     GithubProvider({
         clientId: getGithubCredentials().GHclientId,
         clientSecret: getGithubCredentials().GHclientSecret,
-    })
+    }),
+    EmailProvider({
+        server: {
+          host: process.env.EMAIL_SERVER_HOST,
+          port: process.env.EMAIL_SERVER_PORT,
+          auth: {
+            user: process.env.EMAIL_SERVER_USER,
+            pass: process.env.EMAIL_SERVER_PASSWORD
+          }
+        },
+        from: process.env.EMAIL_FROM
+      }),
+
+
   ],
   callbacks: {
     async jwt({ token, user }) {
